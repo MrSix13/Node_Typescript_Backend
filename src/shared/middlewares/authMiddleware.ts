@@ -41,6 +41,7 @@ export const authorize = (
   next: NextFunction,
 ) => {
   try {
+    console.log(req.user);
     if (!req.user.isAdmin) {
       return res.status(403).json({ message: "Accesso no autorizado" });
     }

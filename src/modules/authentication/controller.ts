@@ -45,7 +45,7 @@ export const login = async (
 
     // Generar el token JWT
     const token = generateToken(
-      { id: user._id, name: user.name },
+      { id: user._id, name: user.name, isAdmin: user.isAdmin },
       process.env.SECRET_JWT,
       "1h",
     );
@@ -80,7 +80,7 @@ export const register = async (
 ) => {
   try {
     const { email, password, name } = req.body;
-
+    console.log({ email, password, name });
     // Validar que se proporcionen el correo electrónico, contraseña y nombre de usuario
     if (!email || !password || !name) {
       return res.sendStatus(400);
@@ -108,7 +108,7 @@ export const register = async (
 
     // Generar el token JWT
     const token = generateToken(
-      { id: user._id, name: user.name },
+      { id: user._id, name: user.name, isAdmin: user.isAdmin },
       process.env.SECRET_JWT!,
       "1h",
     );
