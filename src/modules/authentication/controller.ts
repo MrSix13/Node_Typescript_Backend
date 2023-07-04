@@ -3,15 +3,15 @@ import { Request, Response, NextFunction } from "express";
 import { errorHandler } from "../../shared/middlewares/errorHandler";
 import { createUser, getUserbyEmail } from "./services";
 import { authentication, generateToken, random } from "../../shared/helpers";
-import User from "interfaces/User";
+import { IUser } from "interfaces";
 
 interface RegisterResponse {
-  user: User;
+  user: IUser;
   token: string;
 }
 
 interface LoginResponse {
-  user: User;
+  user: IUser;
   token: string;
 }
 
@@ -56,7 +56,7 @@ export const login = async (
         email: user.email,
         isAdmin: user.isAdmin,
         createdAt: user.createdAt,
-      },
+      } as IUser,
       token,
     };
 
@@ -119,7 +119,7 @@ export const register = async (
         email: user.email,
         isAdmin: user.isAdmin,
         _id: user._id.toString(),
-      },
+      } as IUser,
       token,
     };
 

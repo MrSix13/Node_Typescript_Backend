@@ -1,11 +1,10 @@
-import { ObjectId } from "mongoose";
+import { ObjectId, Document } from "mongoose";
 
-interface User {
+export interface IUser extends Document {
   _id?: string | ObjectId;
   name: string;
   email: string;
   isAdmin?: boolean;
+  authentication?: object | any;
   createdAt?: Date;
 }
-
-export default User;
