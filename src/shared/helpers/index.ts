@@ -1,7 +1,7 @@
 import "dotenv/config";
 import crypto from "crypto";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import User from "../../interfaces/User";
+import { IUser } from "../../interfaces";
 
 //CRYPTO
 export const authentication = (salt: string, password: string): string => {
@@ -33,18 +33,37 @@ export const verifyToken = (
   }
 };
 
+// export const getUserFromToken = (
+//   token: string,
+//   secretKey: string,
+// ): IUser | undefined => {
+//   const payload = verifyToken(token, secretKey);
+//   if (payload) {
+//     const user: IUser = {
+//       _id: payload._id,
+//       name: payload.name,
+//       email: payload.email,
+//       isAdmin: payload.isAdmin,
+//       createdAt: new Date(payload.createdAt),
+//     };
+//     return user;
+//   }
+
+//   return undefined;
+// };
+
 export const getUserFromToken = (
   token: string,
   secretKey: string,
-): User | undefined => {
+): IUser | undefined => {
   const payload = verifyToken(token, secretKey);
   if (payload) {
-    const user: User = {
-      _id: payload._id,
-      name: payload.name,
-      email: payload.email,
-      isAdmin: payload.isAdmin,
-      createdAt: payload.createdAt,
+    const user: any = {
+      _id: payload._id.toString(),
+      name: payload.name.toString(),
+      email: payload.email.toString(),
+      isAdmin: Boolean(payload.isAdmin),
+      createdAt: new Date(payload.createdAt),
     };
     return user;
   }

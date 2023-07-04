@@ -16,7 +16,4 @@ const ingredientsSchema = new Schema<IIngredient>({
   },
 });
 
-export const IngredientsModel = model<IIngredient>(
-  "Ingredient",
-  ingredientsSchema,
-);
+export const Ingredient = model<IIngredient>("Ingredient", ingredientsSchema);
